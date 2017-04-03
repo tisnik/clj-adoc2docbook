@@ -12,6 +12,8 @@
 
 (ns clj-adoc2docbook.adoc2docbook)
 
+(require '[cogset-common.utils :refer :all])
+
 (defn escape-xml-chars
     [string]
     (clojure.string/escape string
