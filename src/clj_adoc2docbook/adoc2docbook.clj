@@ -242,3 +242,19 @@
     [link-to-bugzilla lines]
     (map #(format-one-line link-to-bugzilla %) lines))
 
+(defn transform-lines
+    [link-to-bugzilla lines]
+    (loop [result [] status :nothing lines lines]
+        (let [line                (first lines)
+              [new-status output] (get-output link-to-bugzilla line status)
+              rest                (next lines)
+              new-result  (if output (if (vector? output)
+                                         (into result output)
+                                         (conj result output))
+                                    result)]
+              ;(println status  (get-line-type line) new-status line)
+              (if rest
+                  (recur new-result
+                         new-status rest)
+                  (conj new-result (closing-tag new-status))))))
+
