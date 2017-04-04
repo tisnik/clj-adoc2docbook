@@ -263,3 +263,31 @@
         (is (= "<ulink url='http://www.fedora.cz'>http://www.fedora.cz</ulink>."     (create-links "http://test.org" "http://www.fedora.cz.")))
         (is (= "<ulink url='https://www.fedora.cz'>https://www.fedora.cz</ulink>."   (create-links "http://test.org" "https://www.fedora.cz.")))))
 
+(deftest test-create-links-replace-question-at-end
+    (testing "create-links function"
+        (is (= "<ulink url='http://www.redhat.com'>http://www.redhat.com</ulink>?"   (create-links "http://test.org" "http://www.redhat.com?")))
+        (is (= "<ulink url='https://www.redhat.com'>https://www.redhat.com</ulink>?" (create-links "http://test.org" "https://www.redhat.com?")))
+        (is (= "<ulink url='http://www.fedora.cz'>http://www.fedora.cz</ulink>?"     (create-links "http://test.org" "http://www.fedora.cz?")))
+        (is (= "<ulink url='https://www.fedora.cz'>https://www.fedora.cz</ulink>?"   (create-links "http://test.org" "https://www.fedora.cz?")))))
+
+(deftest test-create-links-replace-bracket-at-end
+    (testing "create-links function"
+        (is (= "<ulink url='http://www.redhat.com'>http://www.redhat.com</ulink>)"    (create-links "http://test.org" "http://www.redhat.com)")))
+        (is (= "<ulink url='https://www.redhat.com'>https://www.redhat.com</ulink>)"  (create-links "http://test.org" "https://www.redhat.com)")))
+        (is (= "(<ulink url='https://www.redhat.com'>https://www.redhat.com</ulink>)" (create-links "http://test.org" "(https://www.redhat.com)")))
+        (is (= "(<ulink url='http://www.fedora.cz'>http://www.fedora.cz</ulink>)"     (create-links "http://test.org" "(http://www.fedora.cz)")))
+        (is (= "<ulink url='http://www.fedora.cz'>http://www.fedora.cz</ulink>)"      (create-links "http://test.org" "http://www.fedora.cz)")))
+        (is (= "<ulink url='https://www.fedora.cz'>https://www.fedora.cz</ulink>)"    (create-links "http://test.org" "https://www.fedora.cz)")))))
+
+(deftest test-create-bz-links-replace
+    (testing "create-links function"
+        (are [x y] (= x y)
+            "BZ#<ulink url='http://bugzilla.test.org/show_bug.cgi?id=1'>1</ulink>"           (create-links "http://bugzilla.test.org/show_bug.cgi?id=" "BZ####1")
+            "BZ#<ulink url='http://bugzilla.test.org/show_bug.cgi?id=100000'>100000</ulink>" (create-links "http://bugzilla.test.org/show_bug.cgi?id=" "BZ####100000"))))
+
+(deftest test-create-bz-links-no-replace
+    (testing "create-links function"
+        (are [x y] (= x y)
+            "BZ#1"      (create-links "http://bugzilla.test.org/show_bug.cgi?id=" "BZ#1")
+            "BZ#100000" (create-links "http://bugzilla.test.org/show_bug.cgi?id=" "BZ#100000"))))
+
