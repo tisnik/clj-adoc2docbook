@@ -249,3 +249,17 @@
         (is (= "<ulink url='http://www.fedora.cz/'>http://www.fedora.cz/</ulink>"     (create-links "http://test.org" "http://www.fedora.cz/")))
         (is (= "<ulink url='https://www.fedora.cz/'>https://www.fedora.cz/</ulink>"   (create-links "http://test.org" "https://www.fedora.cz/")))))
 
+(deftest test-create-links-replace-port-number
+    (testing "create-links function"
+        (is (= "<ulink url='http://www.redhat.com:8080'>http://www.redhat.com:8080</ulink>"   (create-links "http://test.org" "http://www.redhat.com:8080")))
+        (is (= "<ulink url='https://www.redhat.com:8080'>https://www.redhat.com:8080</ulink>" (create-links "http://test.org" "https://www.redhat.com:8080")))
+        (is (= "<ulink url='http://www.fedora.cz:8080'>http://www.fedora.cz:8080</ulink>"     (create-links "http://test.org" "http://www.fedora.cz:8080")))
+        (is (= "<ulink url='https://www.fedora.cz:8080'>https://www.fedora.cz:8080</ulink>"   (create-links "http://test.org" "https://www.fedora.cz:8080")))))
+
+(deftest test-create-links-replace-point-at-end
+    (testing "create-links function"
+        (is (= "<ulink url='http://www.redhat.com'>http://www.redhat.com</ulink>."   (create-links "http://test.org" "http://www.redhat.com.")))
+        (is (= "<ulink url='https://www.redhat.com'>https://www.redhat.com</ulink>." (create-links "http://test.org" "https://www.redhat.com.")))
+        (is (= "<ulink url='http://www.fedora.cz'>http://www.fedora.cz</ulink>."     (create-links "http://test.org" "http://www.fedora.cz.")))
+        (is (= "<ulink url='https://www.fedora.cz'>https://www.fedora.cz</ulink>."   (create-links "http://test.org" "https://www.fedora.cz.")))))
+
