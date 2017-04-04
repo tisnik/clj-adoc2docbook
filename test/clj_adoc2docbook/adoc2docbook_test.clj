@@ -291,3 +291,54 @@
             "BZ#1"      (create-links "http://bugzilla.test.org/show_bug.cgi?id=" "BZ#1")
             "BZ#100000" (create-links "http://bugzilla.test.org/show_bug.cgi?id=" "BZ#100000"))))
 
+(deftest test-get-line-type-1
+    (testing "get-line-type function"
+        (are [x y] (= x y)
+            :empty  (get-line-type nil)
+            :empty  (get-line-type nil)
+            :empty  (get-line-type "")
+            :empty  (get-line-type " ")
+            :empty  (get-line-type "  ")
+            :empty  (get-line-type "   "))))
+
+(deftest test-get-line-type-2
+    (testing "get-line-type function"
+        (are [x y] (= x y)
+            :normal (get-line-type "a")
+            :normal (get-line-type " a")
+            :normal (get-line-type "  a")
+            :normal (get-line-type "abc")
+            :normal (get-line-type " abc")
+            :normal (get-line-type "  abc")
+            :normal (get-line-type "abc abc abc")
+            :normal (get-line-type " abc abc abc")
+            :normal (get-line-type "  abc abc abc")
+            :normal (get-line-type "*a")
+            :normal (get-line-type " *a")
+            :normal (get-line-type "  *a"))))
+
+(deftest test-get-line-type-3
+    (testing "get-line-type function"
+        (are [x y] (= x y)
+            :screen (get-line-type "   a")
+            :screen (get-line-type "    a")
+            :screen (get-line-type "     a")
+            :screen (get-line-type "      a")
+            :screen (get-line-type "   abc")
+            :screen (get-line-type "    abc")
+            :screen (get-line-type "     abc")
+            :screen (get-line-type "      abc")
+            :screen (get-line-type "   *a"))))
+
+(deftest test-get-line-type-4
+    (testing "get-line-type function"
+        (are [x y] (= x y)
+            :item (get-line-type "* a")
+            :item (get-line-type " * a")
+            :item (get-line-type "  * a")
+            :item (get-line-type "   * a")
+            :item (get-line-type "* a b")
+            :item (get-line-type " * a b")
+            :item (get-line-type "  * a b")
+            :item (get-line-type "   * a b"))))
+
