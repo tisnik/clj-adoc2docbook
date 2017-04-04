@@ -225,3 +225,19 @@
         (is (= "&amp;x&gt;x"  (escape-xml-chars "&x>x")))
         (is (= "&amp;x&amp;x" (escape-xml-chars "&x&x")))))
 
+(deftest test-create-links-no-replace
+    (testing "create-links function"
+        (is (= "" (create-links "http://test.org" "")))
+        (is (= "http:"    (create-links "http://test.org" "http:")))
+        (is (= "https:"   (create-links "http://test.org" "https:")))
+        (is (= "http://"  (create-links "http://test.org" "http://")))
+        (is (= "https://" (create-links "http://test.org" "https://")))))
+
+(deftest test-create-links-replace
+    (testing "create-links function"
+        (is (= "" (create-links "http://test.org" "")))
+        (is (= "<ulink url='http://www.redhat.com'>http://www.redhat.com</ulink>"   (create-links "http://test.org" "http://www.redhat.com")))
+        (is (= "<ulink url='https://www.redhat.com'>https://www.redhat.com</ulink>" (create-links "http://test.org" "https://www.redhat.com")))
+        (is (= "<ulink url='http://www.fedora.cz'>http://www.fedora.cz</ulink>"     (create-links "http://test.org" "http://www.fedora.cz")))
+        (is (= "<ulink url='https://www.fedora.cz'>https://www.fedora.cz</ulink>"   (create-links "http://test.org" "https://www.fedora.cz")))))
+
