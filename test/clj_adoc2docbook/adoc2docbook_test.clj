@@ -193,3 +193,35 @@
     (testing "if the clj-adoc2docbook.adoc2docbook/transform-lines definition exists."
         (is (callable? 'clj-adoc2docbook.adoc2docbook/transform-lines))))
 
+;
+; Regular tests
+;
+
+(deftest test-escape-xml-chars
+    (testing "escape-xml-chars"
+        (is (= ""             (escape-xml-chars "")))
+        (is (= " "            (escape-xml-chars " ")))
+        (is (= "x"            (escape-xml-chars "x")))
+        (is (= "\n"           (escape-xml-chars "\n")))
+        (is (= "&lt;"         (escape-xml-chars "<")))
+        (is (= "&gt;"         (escape-xml-chars ">")))
+        (is (= "&amp;"        (escape-xml-chars "&")))
+        (is (= "x&lt;"        (escape-xml-chars "x<")))
+        (is (= "x&gt;"        (escape-xml-chars "x>")))
+        (is (= "x&amp;"       (escape-xml-chars "x&")))
+        (is (= "&lt;x"        (escape-xml-chars "<x")))
+        (is (= "&gt;x"        (escape-xml-chars ">x")))
+        (is (= "&amp;x"       (escape-xml-chars "&x")))
+        (is (= "x&lt;x"       (escape-xml-chars "x<x")))
+        (is (= "x&gt;x"       (escape-xml-chars "x>x")))
+        (is (= "x&amp;x"      (escape-xml-chars "x&x")))
+        (is (= "&lt;x&lt;x"   (escape-xml-chars "<x<x")))
+        (is (= "&lt;x&gt;x"   (escape-xml-chars "<x>x")))
+        (is (= "&lt;x&amp;x"  (escape-xml-chars "<x&x")))
+        (is (= "&gt;x&lt;x"   (escape-xml-chars ">x<x")))
+        (is (= "&gt;x&gt;x"   (escape-xml-chars ">x>x")))
+        (is (= "&gt;x&amp;x"  (escape-xml-chars ">x&x")))
+        (is (= "&amp;x&lt;x"  (escape-xml-chars "&x<x")))
+        (is (= "&amp;x&gt;x"  (escape-xml-chars "&x>x")))
+        (is (= "&amp;x&amp;x" (escape-xml-chars "&x&x")))))
+
