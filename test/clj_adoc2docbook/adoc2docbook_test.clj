@@ -18,7 +18,8 @@
 ; Common functions used by tests.
 ;
 
-(defn callable?  "Test if given function-name is bound to the real function."
+(defn callable?
+    "Test if given function-name is bound to the real function."
     [function-name]
     (clojure.test/function? function-name))
 
@@ -290,6 +291,40 @@
         (are [x y] (= x y)
             "BZ#1"      (create-links "http://bugzilla.test.org/show_bug.cgi?id=" "BZ#1")
             "BZ#100000" (create-links "http://bugzilla.test.org/show_bug.cgi?id=" "BZ#100000"))))
+
+(deftest test-format-one-line-basic
+    (testing "format-one-line function"
+        (is (= "text" (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "text")))
+        (is (= ""     (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "")))
+        (is (= " "    (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" " ")))
+        (is (= "  "   (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "  ")))
+        (is (= "   "  (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "   ")))))
+
+(deftest test-format-one-line-extended
+    (testing "format-one-line function"
+        (is (= "&amp;"             (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "&"      )))
+        (is (= "&lt;"              (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "<"      )))
+        (is (= "&gt;"              (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" ">"      )))
+        (is (= "xyzzy&amp;"        (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "xyzzy&" )))
+        (is (= "xyzzy&lt;"         (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "xyzzy<" )))
+        (is (= "xyzzy&gt;"         (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "xyzzy>" )))
+        (is (= "&amp;xyzzy"        (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "&xyzzy" )))
+        (is (= "&lt;xyzzy"         (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "<xyzzy" )))
+        (is (= "&gt;xyzzy"         (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" ">xyzzy" )))
+        (is (= "X&amp;Y"           (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "X&Y"    )))
+        (is (= "X&lt;Y"            (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "X<Y"    )))
+        (is (= "X&gt;Y"            (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "X>Y"    )))
+        (is (= "&amp;&amp;"        (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "&&"     )))
+        (is (= "&gt;&gt;"          (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" ">>"     )))
+        (is (= "&lt;&lt;"          (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "<<"     )))
+        (is (= "&amp;&gt;"         (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "&>"     )))
+        (is (= "&amp;&lt;"         (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "&<"     )))
+        (is (= "&gt;&amp;"         (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" ">&"     )))
+        (is (= "&lt;&amp;"         (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "<&"     )))
+        (is (= "&amp;xyzzy&gt;"    (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "&xyzzy>")))
+        (is (= "&amp;xyzzy&lt;"    (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "&xyzzy<")))
+        (is (= "&gt;xyzzy&amp;"    (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" ">xyzzy&")))
+        (is (= "&lt;xyzzy&amp;"    (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "<xyzzy&")))))
 
 (deftest test-format-all-lines-basic-usage
     (testing "format-all-lines function"
