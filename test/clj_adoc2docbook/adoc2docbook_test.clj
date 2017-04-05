@@ -326,6 +326,14 @@
         (is (= "&gt;xyzzy&amp;"    (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" ">xyzzy&")))
         (is (= "&lt;xyzzy&amp;"    (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "<xyzzy&")))))
 
+(deftest test-asciidoc-like-transformation-basic
+    (testing "asciidoc-like-transformation function"
+        (is (= ""      (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" "")))
+        (is (= " "     (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " ")))
+        (is (= "  "    (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" "  ")))
+        (is (= "xyzzy" (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" "xyzzy")))
+        (is (= "."     (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" ".")))))
+
 (deftest test-format-all-lines-basic-usage
     (testing "format-all-lines function"
         (are [x y] (= x y)
