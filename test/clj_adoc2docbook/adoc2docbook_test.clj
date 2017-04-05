@@ -334,6 +334,26 @@
         (is (= "xyzzy" (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" "xyzzy")))
         (is (= "."     (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" ".")))))
 
+(deftest test-asciidoc-like-transformation-literal-tag
+    (testing "asciidoc-like-transformation function"
+        (is (= " <literal>test</literal> "       (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " `test` ")))
+        (is (= " <literal>test</literal>."       (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " `test`.")))
+        (is (= " <literal>test</literal>,"       (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " `test`,")))
+        (is (= " <literal>test</literal>)"       (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " `test`)")))
+        (is (= " <command>test</command> "       (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " \"test\" ")))
+        (is (= " <command>test</command>."       (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " \"test\".")))
+        (is (= " <command>test</command>,"       (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " \"test\",")))
+        (is (= " <command>test</command>)"       (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " \"test\")")))
+        (is (= " <systemitem>test</systemitem> " (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " *test* ")))
+        (is (= " <systemitem>test</systemitem>." (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " *test*.")))
+        (is (= " <systemitem>test</systemitem>," (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " *test*,")))
+        (is (= " <systemitem>test</systemitem>)" (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " *test*)")))
+        (is (= " <package>test</package> "       (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " _test_ ")))
+        (is (= " <package>test</package>."       (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " _test_.")))
+        (is (= " <package>test</package>,"       (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " _test_,")))
+        (is (= " <package>test</package>)"       (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " _test_)")))
+        (is (= " <package>test</package>:"       (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " _test_:")))))
+
 (deftest test-format-all-lines-basic-usage
     (testing "format-all-lines function"
         (are [x y] (= x y)
@@ -341,6 +361,7 @@
             '()                (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" [])
             '("")              (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" '(""))
             '("")              (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" [""])
+            '(" ")             (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" [" "])
             '("" "")           (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" '("" ""))
             '("" "" "")        (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" '("" "" ""))
             '("a" "b" "c")     (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" '("a" "b" "c"))
