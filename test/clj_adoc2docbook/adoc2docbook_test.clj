@@ -291,6 +291,52 @@
             "BZ#1"      (create-links "http://bugzilla.test.org/show_bug.cgi?id=" "BZ#1")
             "BZ#100000" (create-links "http://bugzilla.test.org/show_bug.cgi?id=" "BZ#100000"))))
 
+(deftest test-format-all-lines-basic-usage
+    (testing "format-all-lines function"
+        (are [x y] (= x y)
+            '()                (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" '())
+            '()                (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" [])
+            '("")              (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" '(""))
+            '("")              (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" [""])
+            '("" "")           (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" '("" ""))
+            '("" "" "")        (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" '("" "" ""))
+            '("a" "b" "c")     (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" '("a" "b" "c"))
+            '("a" "b" "c" "d") (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" '("a" "b" "c" "d")))))
+
+(deftest test-format-all-lines-escape-xml-chars
+    (testing "format-all-lines function"
+        (are [x y] (= x y)
+            '("&lt;")               (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" ["<"])
+            '("&lt;&lt;")           (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" ["<<"])
+            '("&gt;")               (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" [">"])
+            '("&gt;&gt;")           (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" [">>"])
+            '("&lt;&gt;")           (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" ["<>"])
+            '("&gt;&lt;")           (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" ["><"])
+            '("&lt;" "b" "c")       (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" '("<" "b" "c"))
+            '("&lt;&lt;" "b" "c")   (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" '("<<" "b" "c"))
+            '("&gt;" "b" "c")       (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" '(">" "b" "c"))
+            '("&gt;&gt;" "b" "c")   (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" '(">>" "b" "c"))
+            '("&amp;")              (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" ["&"])
+            '("&amp;&amp;")         (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" ["&&"])
+            '("&gt;")               (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" [">"])
+            '("&gt;&gt;")           (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" [">>"])
+            '("&amp;&gt;")          (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" ["&>"])
+            '("&gt;&amp;")          (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" [">&"])
+            '("&amp;" "b" "c")      (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" '("&" "b" "c"))
+            '("&amp;&amp;" "b" "c") (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" '("&&" "b" "c"))
+            '("&gt;" "b" "c")       (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" '(">" "b" "c"))
+            '("&gt;&gt;" "b" "c")   (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" '(">>" "b" "c"))
+            '("&lt;")               (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" ["<"])
+            '("&lt;&lt;")           (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" ["<<"])
+            '("&amp;")              (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" ["&"])
+            '("&amp;&amp;")         (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" ["&&"])
+            '("&lt;&amp;")          (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" ["<&"])
+            '("&amp;&lt;")          (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" ["&<"])
+            '("&lt;" "b" "c")       (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" '("<" "b" "c"))
+            '("&lt;&lt;" "b" "c")   (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" '("<<" "b" "c"))
+            '("&amp;" "b" "c")      (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" '("&" "b" "c"))
+            '("&amp;&amp;" "b" "c") (format-all-lines "http://bugzilla.test.org/show_bug.cgi?id=" '("&&" "b" "c")))))
+
 (deftest test-get-line-type-1
     (testing "get-line-type function"
         (are [x y] (= x y)
