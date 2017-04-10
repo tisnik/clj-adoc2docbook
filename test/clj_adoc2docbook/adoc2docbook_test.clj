@@ -392,6 +392,17 @@
         (is (= " <package>test</package>)"       (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " _test_)")))
         (is (= " <package>test</package>:"       (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " _test_:")))))
 
+(deftest test-quotes-transformation
+    (testing "quotes transformation"
+        (are [x y] (= x y)
+             "a \"\" b" (asciidoc-like-transformation "" "a \"\" b")
+             "a \"b c"  (asciidoc-like-transformation "" "a \"b c")
+             "a <command>b</command> c" (asciidoc-like-transformation "" "a \"b\" c")
+             "a <command>b b</command> c" (asciidoc-like-transformation "" "a \"b b\" c")
+             "a <command>pcs resource</command> c" (asciidoc-like-transformation "" "a \"pcs resource\" c")
+             "a <command>pcs resource relocate</command> c" (asciidoc-like-transformation "" "a \"pcs resource relocate\" c")
+             "a <command>pcs resource relocate XXX</command> c" (asciidoc-like-transformation "" "a \"pcs resource relocate XXX\" c"))))
+
 (deftest test-format-all-lines-basic-usage
     (testing "format-all-lines function"
         (are [x y] (= x y)
