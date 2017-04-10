@@ -392,6 +392,14 @@
         (is (= " <package>test</package>)"       (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " _test_)")))
         (is (= " <package>test</package>:"       (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " _test_:")))))
 
+(deftest test-star-transformation
+    (testing "underscode transformation"
+        (are [x y] (= x y)
+             "and <systemitem>libcurl</systemitem> based applications"
+             (asciidoc-like-transformation "" "and *libcurl* based applications")
+             "and <systemitem>libcurl</systemitem>-based applications"
+             (asciidoc-like-transformation "" "and *libcurl*-based applications"))))
+
 (deftest test-quotes-transformation
     (testing "quotes transformation"
         (are [x y] (= x y)
