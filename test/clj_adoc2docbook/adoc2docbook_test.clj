@@ -392,6 +392,12 @@
         (is (= " <package>test</package>)"       (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " _test_)")))
         (is (= " <package>test</package>:"       (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " _test_:")))))
 
+(deftest test-underscore-transformation
+    (testing "underscode transformation"
+        (are [x y] (= x y)
+             "The Network Configuration tool (<package>system-config-network</package>)..."
+             (asciidoc-like-transformation "" "The Network Configuration tool (_system-config-network_)..."))))
+
 (deftest test-star-transformation
     (testing "underscode transformation"
         (are [x y] (= x y)
