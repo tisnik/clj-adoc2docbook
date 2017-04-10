@@ -292,6 +292,20 @@
             "BZ#1"      (create-links "http://bugzilla.test.org/show_bug.cgi?id=" "BZ#1")
             "BZ#100000" (create-links "http://bugzilla.test.org/show_bug.cgi?id=" "BZ#100000"))))
 
+(deftest test-create-normal-and-bz-links-replace
+    (testing "create-links function"
+        (are [x y] (= x y)
+            "<ulink url='http://www.test.org'>http://www.test.org</ulink> BZ#<ulink url='http://bugzilla.test.org/show_bug.cgi?id=1'>1</ulink>"
+                (create-links "http://bugzilla.test.org/show_bug.cgi?id=" "http://www.test.org BZ####1")
+            "<ulink url='http://www.test.org'>http://www.test.org</ulink> BZ#<ulink url='http://bugzilla.test.org/show_bug.cgi?id=10000'>10000</ulink>"
+                (create-links "http://bugzilla.test.org/show_bug.cgi?id=" "http://www.test.org BZ####10000")
+            "pre <ulink url='http://www.test.org'>http://www.test.org</ulink> BZ#<ulink url='http://bugzilla.test.org/show_bug.cgi?id=10000'>10000</ulink>"
+                (create-links "http://bugzilla.test.org/show_bug.cgi?id=" "pre http://www.test.org BZ####10000")
+            "<ulink url='http://www.test.org'>http://www.test.org</ulink> BZ#<ulink url='http://bugzilla.test.org/show_bug.cgi?id=10000'>10000</ulink> post"
+                (create-links "http://bugzilla.test.org/show_bug.cgi?id=" "http://www.test.org BZ####10000 post")
+            "pre <ulink url='http://www.test.org'>http://www.test.org</ulink> BZ#<ulink url='http://bugzilla.test.org/show_bug.cgi?id=10000'>10000</ulink> post"
+                (create-links "http://bugzilla.test.org/show_bug.cgi?id=" "pre http://www.test.org BZ####10000 post"))))
+
 (deftest test-format-one-line-basic
     (testing "format-one-line function"
         (is (= "text" (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "text")))
