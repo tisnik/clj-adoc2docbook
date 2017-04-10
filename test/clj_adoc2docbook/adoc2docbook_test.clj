@@ -320,6 +320,16 @@
             "pre <ulink url='http://www.test.org'>http://www.test.org</ulink> BZ#10000 post"
                 (create-links "http://bugzilla.test.org/show_bug.cgi?id=" "pre http://www.test.org BZ#10000 post"))))
 
+(deftest test-check-CCS-357
+    (testing "CCS-357"
+        (is (= "<ulink url='http://www.test.org'>http://www.test.org</ulink>" (create-links "http://bugzilla.test.org/show_bug.cgi?id=" "http://www.test.org")))
+        (is (= "pre <ulink url='http://www.test.org'>http://www.test.org</ulink> post" (create-links "http://bugzilla.test.org/show_bug.cgi?id=" "pre http://www.test.org post")))
+        (is (= "pre <ulink url='http://www.test.org'>http://www.test.org</ulink> middle <ulink url='http://www.test.org'>http://www.test.org</ulink> post" (create-links "http://bugzilla.test.org/show_bug.cgi?id=" "pre http://www.test.org middle http://www.test.org post")))
+        (is (= "pre <ulink url='http://www.foobar.com'>http://www.foobar.com</ulink> middle <ulink url='http://www.test.org'>http://www.test.org</ulink> post" (create-links "http://bugzilla.test.org/show_bug.cgi?id=" "pre http://www.foobar.com middle http://www.test.org post")))
+        (is (= "1 <ulink url='http://www.foo.com'>http://www.foo.com</ulink> 2 <ulink url='http://www.bar.com'>http://www.bar.com</ulink> 3 <ulink url='http://www.baz.com'>http://www.baz.com</ulink>" (create-links "http://bugzilla.test.org/show_bug.cgi?id=" "1 http://www.foo.com 2 http://www.bar.com 3 http://www.baz.com")))
+    ))
+
+
 (deftest test-format-one-line-basic
     (testing "format-one-line function"
         (is (= "text" (format-one-line "http://bugzilla.test.org/show_bug.cgi?id=" "text")))
