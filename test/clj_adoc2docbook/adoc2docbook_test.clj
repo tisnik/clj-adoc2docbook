@@ -392,6 +392,19 @@
         (is (= " <package>test</package>)"       (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " _test_)")))
         (is (= " <package>test</package>:"       (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " _test_:")))))
 
+(deftest test-apostrophe-transformation
+    (testing "quotes transformation"
+       ; usage of ' for <literal> is now deprecated
+        (is (= "a '' b" (asciidoc-like-transformation "" "a '' b")))
+        (is (= "a 'b c" (asciidoc-like-transformation "" "a 'b c")))
+       ;(is (= "a <literal>b</literal> c" (asciidoc-like-transformation "a 'b' c")))
+       ;(is (= "a <literal>b b</literal> c" (asciidoc-like-transformation "a 'b b' c")))
+       ;(is (= "a <literal>pcs resource</literal> c" (asciidoc-like-transformation "a 'pcs resource' c")))
+       ;(is (= "a <literal>pcs resource relocate</literal> c" (asciidoc-like-transformation "a 'pcs resource relocate' c")))
+       ;(is (= "a <literal>pcs resource relocate xxx</literal> c" (asciidoc-like-transformation "a 'pcs resource relocate xxx' c")))
+       ;(is (= "a <literal>pcs resource relocate xxx yyy</literal> c" (asciidoc-like-transformation "a 'pcs resource relocate xxx yyy' c")))
+    ))
+
 (deftest test-backtick-transformation
     (testing "backtick transformation"
         (are [x y] (= x y)
