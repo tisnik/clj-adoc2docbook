@@ -464,12 +464,6 @@
              "The Network Configuration tool (<package>system-config-network</package>)..."
              (asciidoc-like-transformation "" "The Network Configuration tool (_system-config-network_)..."))))
 
-(deftest test-underscore-transformation
-    (testing "underscode transformation"
-        (are [x y] (= x y)
-             "The Network Configuration tool (<package>system-config-network</package>)..."
-             (asciidoc-like-transformation "" "The Network Configuration tool (_system-config-network_)..."))))
-
 (deftest test-star-transformation
     (testing "underscode transformation"
         (are [x y] (= x y)
@@ -586,4 +580,11 @@
             :item (get-line-type " * a b")
             :item (get-line-type "  * a b")
             :item (get-line-type "   * a b"))))
+
+(deftest test-list-item
+    (testing "list-item"
+        (are [x y] (= x y)
+            "    <listitem><para>test</para></listitem>\n" (list-item "" "* test")
+            "    <listitem><para>t</para></listitem>\n" (list-item "" "* t")
+            "    <listitem><para></para></listitem>\n" (list-item "" "* "))))
 
