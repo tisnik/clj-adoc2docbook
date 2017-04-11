@@ -392,6 +392,44 @@
         (is (= " <package>test</package>)"       (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " _test_)")))
         (is (= " <package>test</package>:"       (asciidoc-like-transformation "http://bugzilla.test.org/show_bug.cgi?id=" " _test_:")))))
 
+(deftest test-asciidoc-like-transformation-literal-tag-at-the-beginning
+    (testing "asciidoc-like-transformation function"
+       ; usage of ' for <literal> is now deprecated
+       ;(is (= "<literal>test</literal> "       (asciidoc-like-transformation "" "'test' ")))
+       ;(is (= "<literal>test</literal>."       (asciidoc-like-transformation "" "'test'.")))
+       ;(is (= "<literal>test</literal>,"       (asciidoc-like-transformation "" "'test',")))
+        (is (= "<literal>test</literal> "       (asciidoc-like-transformation "" "`test` ")))
+        (is (= "<literal>test</literal>."       (asciidoc-like-transformation "" "`test`.")))
+        (is (= "<literal>test</literal>,"       (asciidoc-like-transformation "" "`test`,")))
+        (is (= "<command>test</command> "       (asciidoc-like-transformation "" "\"test\" ")))
+        (is (= "<command>test</command>."       (asciidoc-like-transformation "" "\"test\".")))
+        (is (= "<command>test</command>,"       (asciidoc-like-transformation "" "\"test\",")))
+        (is (= "<systemitem>test</systemitem> " (asciidoc-like-transformation "" "*test* ")))
+        (is (= "<systemitem>test</systemitem>." (asciidoc-like-transformation "" "*test*.")))
+        (is (= "<systemitem>test</systemitem>," (asciidoc-like-transformation "" "*test*,")))
+        (is (= "<package>test</package> "       (asciidoc-like-transformation "" "_test_ ")))
+        (is (= "<package>test</package>."       (asciidoc-like-transformation "" "_test_.")))
+        (is (= "<package>test</package>,"       (asciidoc-like-transformation "" "_test_,")))))
+
+(deftest test-asciidoc-like-transformation-literal-tag-at-the-end
+    (testing "asciidoc-like-transformation function"
+       ; usage of ' for <literal> is now deprecated
+       ;(is (= " <literal>test</literal>"         (asciidoc-like-transformation "" " 'test'")))
+       ;(is (= "  <literal>test</literal>"        (asciidoc-like-transformation "" "  'test'")))
+       ;(is (= "   <literal>test</literal>"       (asciidoc-like-transformation "" "   'test'")))
+        (is (= " <literal>test</literal>"         (asciidoc-like-transformation "" " `test`")))
+        (is (= "  <literal>test</literal>"        (asciidoc-like-transformation "" "  `test`")))
+        (is (= "   <literal>test</literal>"       (asciidoc-like-transformation "" "   `test`")))
+        (is (= " <command>test</command>"         (asciidoc-like-transformation "" " \"test\"")))
+        (is (= "  <command>test</command>"        (asciidoc-like-transformation "" "  \"test\"")))
+        (is (= "   <command>test</command>"       (asciidoc-like-transformation "" "   \"test\"")))
+        (is (= " <systemitem>test</systemitem>"   (asciidoc-like-transformation "" " *test*")))
+        (is (= "  <systemitem>test</systemitem>"  (asciidoc-like-transformation "" "  *test*")))
+        (is (= "   <systemitem>test</systemitem>" (asciidoc-like-transformation "" "   *test*")))
+        (is (= " <package>test</package>"         (asciidoc-like-transformation "" " _test_")))
+        (is (= "  <package>test</package>"        (asciidoc-like-transformation "" "  _test_")))
+        (is (= "   <package>test</package>"       (asciidoc-like-transformation "" "   _test_")))))
+
 (deftest test-apostrophe-transformation
     (testing "quotes transformation"
        ; usage of ' for <literal> is now deprecated
