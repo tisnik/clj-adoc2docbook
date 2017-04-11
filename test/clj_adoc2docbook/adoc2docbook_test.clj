@@ -595,3 +595,10 @@
             "</itemizedlist>\n\n<screen>\nt" (screen-list-item-begin "t")
             "</itemizedlist>\n\n<screen>\n " (screen-list-item-begin " "))))
 
+(deftest test-screen-list-item-end
+    (testing "list-item"
+        (are [x y] (= x y)
+            "\n</screen>\n\n<itemizedlist>\n    <listitem><para>test</para></listitem>\n" (screen-list-item-end "* test")
+            "\n</screen>\n\n<itemizedlist>\n    <listitem><para>t</para></listitem>\n" (screen-list-item-end "* t")
+            "\n</screen>\n\n<itemizedlist>\n    <listitem><para></para></listitem>\n" (screen-list-item-end "* "))))
+
