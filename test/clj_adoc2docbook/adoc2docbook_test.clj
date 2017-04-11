@@ -588,3 +588,10 @@
             "    <listitem><para>t</para></listitem>\n" (list-item "" "* t")
             "    <listitem><para></para></listitem>\n" (list-item "" "* "))))
 
+(deftest test-screen-list-item-begin
+    (testing "list-item"
+        (are [x y] (= x y)
+            "</itemizedlist>\n\n<screen>\ntest" (screen-list-item-begin "test")
+            "</itemizedlist>\n\n<screen>\nt" (screen-list-item-begin "t")
+            "</itemizedlist>\n\n<screen>\n " (screen-list-item-begin " "))))
+
