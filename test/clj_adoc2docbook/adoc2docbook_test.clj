@@ -589,16 +589,24 @@
             "    <listitem><para></para></listitem>\n" (list-item "" "* "))))
 
 (deftest test-screen-list-item-begin
-    (testing "list-item"
+    (testing "screen-list-item-begin"
         (are [x y] (= x y)
             "</itemizedlist>\n\n<screen>\ntest" (screen-list-item-begin "test")
             "</itemizedlist>\n\n<screen>\nt" (screen-list-item-begin "t")
             "</itemizedlist>\n\n<screen>\n " (screen-list-item-begin " "))))
 
 (deftest test-screen-list-item-end
-    (testing "list-item"
+    (testing "screen-list-item-end"
         (are [x y] (= x y)
             "\n</screen>\n\n<itemizedlist>\n    <listitem><para>test</para></listitem>\n" (screen-list-item-end "* test")
             "\n</screen>\n\n<itemizedlist>\n    <listitem><para>t</para></listitem>\n" (screen-list-item-end "* t")
             "\n</screen>\n\n<itemizedlist>\n    <listitem><para></para></listitem>\n" (screen-list-item-end "* "))))
+
+(deftest test-start-para
+    (testing "start-para"
+        (are [x y] (= x y)
+            ["<para>" "paragraph"] (start-para "" "paragraph")
+            ["<para>" "paragraph test"] (start-para "" "paragraph test")
+            ["<para>" "*star*"] (start-para "" "*star*")
+            ["<para>" "_underline_"] (start-para "" "_underline_"))))
 
