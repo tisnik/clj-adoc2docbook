@@ -605,8 +605,8 @@
 (deftest test-start-para
     (testing "start-para"
         (are [x y] (= x y)
-            ["<para>" "paragraph"] (start-para "" "paragraph")
+            ["<para>" "paragraph"]      (start-para "" "paragraph")
             ["<para>" "paragraph test"] (start-para "" "paragraph test")
-            ["<para>" "*star*"] (start-para "" "*star*")
-            ["<para>" "_underline_"] (start-para "" "_underline_"))))
+            ["<para>" "*star*"]         (start-para "" "*star*")
+            ["<para>" "_underline_"]    (start-para "" "_underline_"))))
 
