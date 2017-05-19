@@ -732,3 +732,22 @@
             ["test" "\n"] (screen-in-middle-notrim "test  ")
             ["test" "\n"] (screen-in-middle-notrim "  test  "))))
 
+(deftest test-screen-end
+    (testing "screen-end"
+        (are [x y] (= x y)
+            ["</screen>\n" "\n" "<para>" ""    ] (screen-end "" "")
+            ["</screen>\n" "\n" "<para>" ""    ] (screen-end "" "   ")
+            ["</screen>\n" "\n" "<para>" "test"] (screen-end "" "test")
+            ["</screen>\n" "\n" "<para>" "test"] (screen-end "" "  test")
+            ["</screen>\n" "\n" "<para>" "test"] (screen-end "" "test  ")
+            ["</screen>\n" "\n" "<para>" "test"] (screen-end "" "  test  "))))
+
+(deftest test-closing-tag
+    (testing "closing-tag"
+        (are [x y] (= x y)
+            "\n"                (closing-tag :nothing)
+            "</screen>\n"       (closing-tag :screen)
+            "</para>\n"         (closing-tag :paragraph)
+            "</itemizedlist>\n" (closing-tag :itemized-list)
+            "</screen>\n"       (closing-tag :itemized-screen))))
+
