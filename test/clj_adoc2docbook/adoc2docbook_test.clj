@@ -430,6 +430,12 @@
         (is (= "  <package>test</package>"        (asciidoc-like-transformation "" "  _test_")))
         (is (= "   <package>test</package>"       (asciidoc-like-transformation "" "   _test_")))))
 
+(deftest test-asciidoc-like-transformation-bz-replace
+    (testing "asciidoc-like-transformation function"
+        (println (asciidoc-like-transformation "http://bugzilla.org/123456" "(BZ#123456)"))
+        (is (= "  <ulink url='http://bugzilla.org/123456'>BZ#123456</ulink>" (asciidoc-like-transformation "http://bugzilla.org/" "  BZ#123456")))
+        (is (= "- <ulink url='http://bugzilla.org/123456'>BZ#123456</ulink>" (asciidoc-like-transformation "http://bugzilla.org/" "- BZ#123456")))))
+
 (deftest test-apostrophe-transformation
     (testing "quotes transformation"
        ; usage of ' for <literal> is now deprecated
