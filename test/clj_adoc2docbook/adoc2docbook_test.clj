@@ -751,3 +751,16 @@
             "</itemizedlist>\n" (closing-tag :itemized-list)
             "</screen>\n"       (closing-tag :itemized-screen))))
 
+(deftest test-transform-lines-empty-input
+    (testing "transform-lines"
+        (are [x y] (= x y)
+            ["\n"] (transform-lines "" [])
+            ["\n"] (transform-lines "" [""]))))
+
+(deftest test-transform-lines-simple-text
+    (testing "transform-lines"
+        (are [x y] (= x y)
+            ["<para>" "text" "</para>\n"] (transform-lines "" ["text"])
+            ["<para>" "text" " " "text" "</para>\n"] (transform-lines "" ["text" "text"])
+            ["<para>" "text"  "</para>\n" "\n" "<para>" "text" "</para>\n"] (transform-lines "" ["text" " " "text"]))))
+
