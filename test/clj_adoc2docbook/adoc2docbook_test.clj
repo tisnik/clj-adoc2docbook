@@ -653,3 +653,8 @@
         (are [x y] (= x y)
             ["</para>\n" "\n" "<itemizedlist>\n" "    <listitem><para>text</para></listitem>\n"] (end-para-first-list-item "" "* text"))))
 
+(deftest test-last-list-item
+    (testing "last-list-item"
+        (are [x y] (= x y)
+            ["</itemizedlist>\n" "\n" "<para>" "text"] (last-list-item "" "text"))))
+
