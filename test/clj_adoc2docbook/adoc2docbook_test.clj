@@ -658,3 +658,48 @@
         (are [x y] (= x y)
             ["</itemizedlist>\n" "\n" "<para>" "text"] (last-list-item "" "text"))))
 
+(deftest test-screen
+    (testing "screen"
+        (are [x y] (= x y)
+            ""     (screen "")
+            ""     (screen "   ")
+            "test" (screen "test")
+            "test" (screen "  test")
+            "test" (screen "test  ")
+            "test" (screen "  test  "))))
+
+(deftest test-screen-notrim
+    (testing "screen"
+        (are [x y] (= x y)
+            ""       (screen-notrim "")
+            ""       (screen-notrim "   ")
+            "test"   (screen-notrim "test")
+            "test"   (screen-notrim "  test")
+            "test"   (screen-notrim "   test")
+            "test "  (screen-notrim "   test ")
+            "test  " (screen-notrim "   test  ")
+            "test"   (screen-notrim "    test")
+            "test "  (screen-notrim "    test ")
+            "test  " (screen-notrim "    test  "))))
+
+(deftest test-screen-empty
+    (testing "screen"
+        (are [x y] (= x y)
+            ["\n" ""     "\n"] (screen-empty "")
+            ["\n" ""     "\n"] (screen-empty "   ")
+            ["\n" "test" "\n"] (screen-empty "test")
+            ["\n" "test" "\n"] (screen-empty "  test")
+            ["\n" "test" "\n"] (screen-empty "test  ")
+            ["\n" "test" "\n"] (screen-empty "  test  "))))
+
+(deftest test-screen-begin
+    (testing "screen"
+        (are [x y] (= x y)
+            ["<screen>\n" ""     "\n"] (screen-begin "")
+            ["<screen>\n" ""     "\n"] (screen-begin "   ")
+            ["<screen>\n" "test" "\n"] (screen-begin "test")
+            ["<screen>\n" "test" "\n"] (screen-begin "  test")
+            ["<screen>\n" "test" "\n"] (screen-begin "test  ")
+            ["<screen>\n" "test" "\n"] (screen-begin "  test  "))))
+
+
