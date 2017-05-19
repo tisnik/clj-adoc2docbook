@@ -702,4 +702,33 @@
             ["<screen>\n" "test" "\n"] (screen-begin "test  ")
             ["<screen>\n" "test" "\n"] (screen-begin "  test  "))))
 
+(deftest test-end-para-screen-begin
+    (testing "screen"
+        (are [x y] (= x y)
+            ["</para>\n" "\n" "<screen>\n" ""     "\n"] (end-para-screen-begin "")
+            ["</para>\n" "\n" "<screen>\n" ""     "\n"] (end-para-screen-begin "   ")
+            ["</para>\n" "\n" "<screen>\n" "test" "\n"] (end-para-screen-begin "test")
+            ["</para>\n" "\n" "<screen>\n" "test" "\n"] (end-para-screen-begin "  test")
+            ["</para>\n" "\n" "<screen>\n" "test" "\n"] (end-para-screen-begin "test  ")
+            ["</para>\n" "\n" "<screen>\n" "test" "\n"] (end-para-screen-begin "  test  "))))
+
+(deftest test-screen-in-middle
+    (testing "screen-in-middle"
+        (are [x y] (= x y)
+            [""     "\n"] (screen-in-middle "")
+            [""     "\n"] (screen-in-middle "   ")
+            ["test" "\n"] (screen-in-middle "test")
+            ["test" "\n"] (screen-in-middle "  test")
+            ["test" "\n"] (screen-in-middle "test  ")
+            ["test" "\n"] (screen-in-middle "  test  "))))
+
+(deftest test-screen-in-middle-notrim
+    (testing "screen-in-middle"
+        (are [x y] (= x y)
+            [""     "\n"] (screen-in-middle-notrim "")
+            [""     "\n"] (screen-in-middle-notrim "   ")
+            ["test" "\n"] (screen-in-middle-notrim "test")
+            ["test" "\n"] (screen-in-middle-notrim "  test")
+            ["test" "\n"] (screen-in-middle-notrim "test  ")
+            ["test" "\n"] (screen-in-middle-notrim "  test  "))))
 
