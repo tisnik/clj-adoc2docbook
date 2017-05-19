@@ -616,6 +616,13 @@
             ["<para>" "*star*"]         (start-para "" "*star*")
             ["<para>" "_underline_"]    (start-para "" "_underline_"))))
 
+(deftest test-start-para-transformations
+    (testing "start-para"
+        (are [x y] (= x y)
+            ["<para>" " <systemitem>star</systemitem> "] (start-para "" " *star* ")
+            ["<para>" " <package>underline</package> "]  (start-para "" " _underline_ ")
+            ["<para>" " <literal>backtick</literal> "]   (start-para "" " `backtick` "))))
+
 (deftest test-middle-in-para
     (testing "middle-in-para"
         (are [x y] (= x y)
