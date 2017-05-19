@@ -638,3 +638,7 @@
             [" " " <package>underline</package> "]  (middle-in-para "" " _underline_ ")
             [" " " <literal>backtick</literal> "]   (middle-in-para "" " `backtick` "))))
 
+(deftest test-end-para
+    (testing "end-para"
+        (are [x y] (= x y)
+            ["</para>\n" "\n"]      (end-para))))
