@@ -616,3 +616,11 @@
             ["<para>" "*star*"]         (start-para "" "*star*")
             ["<para>" "_underline_"]    (start-para "" "_underline_"))))
 
+(deftest test-middle-in-para
+    (testing "middle-in-para"
+        (are [x y] (= x y)
+            [" " "paragraph"]      (middle-in-para "" "paragraph")
+            [" " "paragraph test"] (middle-in-para "" "paragraph test")
+            [" " "*star*"]         (middle-in-para "" "*star*")
+            [" " "_underline_"]    (middle-in-para "" "_underline_"))))
+
