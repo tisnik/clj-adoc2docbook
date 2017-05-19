@@ -12,11 +12,14 @@
 
 (ns clj-adoc2docbook.adoc2docbook)
 
+
+(require '[clojure.string          :as str])
+
 (require '[cogset-common.utils :refer :all])
 
 (defn escape-xml-chars
     [string]
-    (clojure.string/escape string
+    (str/escape string
         {\< "&lt;", \> "&gt;", \& "&amp;"}))
 
 ; Some special characters have special meaning:
@@ -29,34 +32,34 @@
     ; TODO - just a quick hack, would be better to replace with proper state machine
     (-> string
         ; special handling for words at the beginning of line
-        ;(clojure.string/replace #"^'([^\s]+\s*[^\s']*)'([ .,])"    #(str "<literal>"    (second %1) "</literal>" (nth %1 2)))
-        (clojure.string/replace #"^`([^\s]+\s*[^\s`]*)`([ .,(])"    #(str "<literal>"    (second %1) "</literal>" (nth %1 2)))
-        (clojure.string/replace #"^\"([^\s]+\s*[^\s\"]*)\"([ .,])" #(str "<command>"    (second %1) "</command>" (nth %1 2)))
-        (clojure.string/replace #"^\*([^\s]+\s*[^\s\*]*)\*([ .,])" #(str "<systemitem>" (second %1) "</systemitem>" (nth %1 2)))
-        (clojure.string/replace #"^_([^\s]+\s*[^\s\_]*)_([ .,])"   #(str "<package>"    (second %1) "</package>" (nth %1 2)))
+        ;(str/replace #"^'([^\s]+\s*[^\s']*)'([ .,])"    #(str "<literal>"    (second %1) "</literal>" (nth %1 2)))
+        (str/replace #"^`([^\s]+\s*[^\s`]*)`([ .,(])"    #(str "<literal>"    (second %1) "</literal>" (nth %1 2)))
+        (str/replace #"^\"([^\s]+\s*[^\s\"]*)\"([ .,])" #(str "<command>"    (second %1) "</command>" (nth %1 2)))
+        (str/replace #"^\*([^\s]+\s*[^\s\*]*)\*([ .,])" #(str "<systemitem>" (second %1) "</systemitem>" (nth %1 2)))
+        (str/replace #"^_([^\s]+\s*[^\s\_]*)_([ .,])"   #(str "<package>"    (second %1) "</package>" (nth %1 2)))
 
         ; words in the middle - should start with <space> and end with <space>, <dot>, <comma>, or <parathesis>
-        ;(clojure.string/replace  #" '([^\s]+(\s+[^\s']+)*)'([ .,)])"    #(str " <literal>"    (second %1) "</literal>" (nth %1 3)))
-        (clojure.string/replace  #"([ (])`([^\s]+(\s+[^\s`]+)*)`([ .,()])"    #(str (second %1) "<literal>" (nth %1 2) "</literal>" (nth %1 4)))
-        (clojure.string/replace #" \"([^\s]+(\s+[^\s\"]+)*)\"([ .,)])"   #(str " <command>"     (second %1) "</command>" (nth %1 3)))
-        (clojure.string/replace #" \*([^\s]+(\s+[^\s\*]+)*)\*([ .,\-)])"   #(str " <systemitem>"  (second %1) "</systemitem>" (nth %1 3)))
-        (clojure.string/replace  #" _([^\s]+(\s+[^\s_]+)*)_([ .,:)])"    #(str " <package>"    (second %1) "</package>" (nth %1 3)))
+        ;(str/replace  #" '([^\s]+(\s+[^\s']+)*)'([ .,)])"    #(str " <literal>"    (second %1) "</literal>" (nth %1 3)))
+        (str/replace  #"([ (])`([^\s]+(\s+[^\s`]+)*)`([ .,()])"    #(str (second %1) "<literal>" (nth %1 2) "</literal>" (nth %1 4)))
+        (str/replace #" \"([^\s]+(\s+[^\s\"]+)*)\"([ .,)])"   #(str " <command>"     (second %1) "</command>" (nth %1 3)))
+        (str/replace #" \*([^\s]+(\s+[^\s\*]+)*)\*([ .,\-)])"   #(str " <systemitem>"  (second %1) "</systemitem>" (nth %1 3)))
+        (str/replace  #" _([^\s]+(\s+[^\s_]+)*)_([ .,:)])"    #(str " <package>"    (second %1) "</package>" (nth %1 3)))
 
         ; special handling for words at end of line
-        ;(clojure.string/replace  #" '([^\s]+\s*[^\s']*\s*[^\s']*)'$"    #(str " <literal>"    (second %1) "</literal>"))
-        (clojure.string/replace  #" `([^\s]+\s*[^\s`]*\s*[^\s`]*)`$"    #(str " <literal>"    (second %1) "</literal>"))
-        (clojure.string/replace #" \"([^\s]+\s*[^\s\"]*\s*[^\s\"]*)\"$" #(str " <command>"    (second %1) "</command>"))
-        (clojure.string/replace #" \*([^\s]+\s*[^\s\*]*\s*[^\s\*]*)\*$" #(str " <systemitem>" (second %1) "</systemitem>"))
-        (clojure.string/replace  #" _([^\s]+\s*[^\s_]*\s*[^\s_]*)_$"    #(str " <package>"    (second %1) "</package>"))
+        ;(str/replace  #" '([^\s]+\s*[^\s']*\s*[^\s']*)'$"    #(str " <literal>"    (second %1) "</literal>"))
+        (str/replace  #" `([^\s]+\s*[^\s`]*\s*[^\s`]*)`$"    #(str " <literal>"    (second %1) "</literal>"))
+        (str/replace #" \"([^\s]+\s*[^\s\"]*\s*[^\s\"]*)\"$" #(str " <command>"    (second %1) "</command>"))
+        (str/replace #" \*([^\s]+\s*[^\s\*]*\s*[^\s\*]*)\*$" #(str " <systemitem>" (second %1) "</systemitem>"))
+        (str/replace  #" _([^\s]+\s*[^\s_]*\s*[^\s_]*)_$"    #(str " <package>"    (second %1) "</package>"))
 
         ; special cases
-        (clojure.string/replace  #"\(_([^\s]+(\s+[^\s_]+)*)_\)"    #(str "(<package>"    (second %1) "</package>)"))
+        (str/replace  #"\(_([^\s]+(\s+[^\s_]+)*)_\)"    #(str "(<package>"    (second %1) "</package>)"))
 
         ; for situations when whole line is in backticks
-        (clojure.string/replace  #"^`([^`]+)`$"    #(str "<literal>" (second %1) "</literal>"))
+        (str/replace  #"^`([^`]+)`$"    #(str "<literal>" (second %1) "</literal>"))
 
         ; BZ#123456 should be rendered as <ulink>
-        (clojure.string/replace #"([^,]) (BZ#[0-9]+)" #(str (second %1) " <ulink url='" link-to-bugzilla (subs (third %1) 3) "'>" (third %1) "</ulink>"))))
+        (str/replace #"([^,]) (BZ#[0-9]+)" #(str (second %1) " <ulink url='" link-to-bugzilla (subs (third %1) 3) "'>" (third %1) "</ulink>"))))
 
 (defn get-line-type
     "There exist four line types, according to the specification:
@@ -66,7 +69,7 @@
      4: empty lines that should be ignored when not in <screen> environment"
     [line]
     (cond (empty? line)                   :empty
-          (empty? (clojure.string/trim line))        :empty
+          (empty? (str/trim line))        :empty
           (re-matches #"\s*\*\s+.*" line) :item   ; !!!order is important!!!
           (.startsWith line "   ")        :screen ; 3 or more spaces
           :else                           :normal
@@ -75,7 +78,7 @@
 (defn list-item
     [link-to-bugzilla line]
     (let [star-index (inc (.indexOf line "*"))
-          content    (clojure.string/trim (subs line star-index))]
+          content    (str/trim (subs line star-index))]
         (str "    <listitem><para>" (asciidoc-like-transformation link-to-bugzilla content) "</para></listitem>\n")))
 
 (defn screen-list-item-begin
@@ -85,7 +88,7 @@
 (defn screen-list-item-end
     [line]
     (let [star-index (inc (.indexOf line "*"))
-          content    (clojure.string/trim (subs line star-index))]
+          content    (str/trim (subs line star-index))]
         (str "\n</screen>\n\n<itemizedlist>\n    <listitem><para>" content "</para></listitem>\n")))
 
 (defn start-para
@@ -123,14 +126,14 @@
 
 (defn screen
     [line]
-    (clojure.string/trim line))
+    (str/trim line))
 
 (defn screen-notrim
     [line]
     (cond
         (.startsWith line "    ") (subs line 4)
         (.startsWith line "   ") (subs line 3)
-        :else (clojure.string/trim line)))
+        :else (str/trim line)))
 
 (defn screen-empty
     [line]
@@ -215,14 +218,14 @@
     [string]
     (let [href (re-find http-regexp string)]
         (if href
-            (clojure.string/replace string http-regexp #(str "<ulink url='" (first %1) "'>" (first %1) "</ulink>"))
+            (str/replace string http-regexp #(str "<ulink url='" (first %1) "'>" (first %1) "</ulink>"))
             string)))
 
 (defn create-bugzilla-links
     [link-to-bugzilla string]
     (let [bz-href (re-find bz-href-regexp string)]
         (if bz-href
-            (clojure.string/replace string bz-href-regexp #(str "BZ#<ulink url='" link-to-bugzilla (second %1) "'>" (second %1) "</ulink>"))
+            (str/replace string bz-href-regexp #(str "BZ#<ulink url='" link-to-bugzilla (second %1) "'>" (second %1) "</ulink>"))
             string)))
 
 (defn create-links
