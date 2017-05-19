@@ -631,3 +631,10 @@
             [" " "*star*"]         (middle-in-para "" "*star*")
             [" " "_underline_"]    (middle-in-para "" "_underline_"))))
 
+(deftest test-middle-in-para-transformations
+    (testing "middle-in-para"
+        (are [x y] (= x y)
+            [" " " <systemitem>star</systemitem> "] (middle-in-para "" " *star* ")
+            [" " " <package>underline</package> "]  (middle-in-para "" " _underline_ ")
+            [" " " <literal>backtick</literal> "]   (middle-in-para "" " `backtick` "))))
+
