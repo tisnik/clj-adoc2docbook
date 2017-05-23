@@ -862,3 +862,14 @@
             ["<para>" "text" " " "text" "</para>\n"] (transform-lines "" ["text" "text"])
             ["<para>" "text"  "</para>\n" "\n" "<para>" "text" "</para>\n"] (transform-lines "" ["text" " " "text"]))))
 
+(deftest test-transform-lines-special-case
+    (testing "transform-lines"
+        (are [x y] (= x y)
+            ["\n"] (transform-lines "" nil))))
+
+(deftest test-transform-lines-special-case-2
+    (testing "transform-lines"
+        (with-redefs [get-output (fn [link-to-bugzilla line last-status] [:nothing "text"])]
+            (are [x y] (= x y)
+                ["text" "\n"] (transform-lines "" nil)))))
+
