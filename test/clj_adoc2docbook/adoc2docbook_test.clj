@@ -787,6 +787,22 @@
             [:screen        (end-para-screen-begin "    code")]              "    code"
             [:screen        (end-para-screen-begin "     code")]             "     code")))
 
+(deftest test-get-output-last-status-itemized-list
+    (testing "get-output"
+        (are [output line] (= output (get-output "BZ-link" line :itemized-list))
+            [:itemized-list    nil]                                  ""
+            [:itemized-list    nil]                                  " "
+            [:itemized-list    nil]                                  "  "
+            [:itemized-list    (list-item "BZ-link" "* ")]           "* "
+            [:itemized-list    (list-item "BZ-link" "* item")]       "* item"
+            [:itemized-list    (list-item "BZ-link" "*  item")]      "*  item"
+            [:paragraph        (last-list-item "BZ-link" "para")]    "para"
+            [:paragraph        (last-list-item "BZ-link" " para")]   " para"
+            [:paragraph        (last-list-item "BZ-link" "  para")]  "  para"
+            [:itemized-screen  (screen-list-item-begin "   code")]   "   code"
+            [:itemized-screen  (screen-list-item-begin "    code")]  "    code"
+            [:itemized-screen  (screen-list-item-begin "     code")] "     code")))
+
 (deftest test-transform-lines-empty-input
     (testing "transform-lines"
         (are [x y] (= x y)
