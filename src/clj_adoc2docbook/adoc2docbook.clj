@@ -206,8 +206,8 @@
         :screen          "</screen>\n"
         :paragraph       "</para>\n"
         :itemized-list   "</itemizedlist>\n"
-        :itemized-screen "</screen>\n"))
-
+        :itemized-screen "</screen>\n"
+                         "")) ; no match
 (def http-regexp
     ; scheme     host name                             domain       query+fragment               we don't want those chars at the end of URL
     #"(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)[^?.,!) ])")

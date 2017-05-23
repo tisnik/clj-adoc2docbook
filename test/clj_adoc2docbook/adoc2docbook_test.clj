@@ -751,6 +751,10 @@
             "</itemizedlist>\n" (closing-tag :itemized-list)
             "</screen>\n"       (closing-tag :itemized-screen))))
 
+(deftest test-closing-tag-no-match
+    (testing "closing-tag"
+        (is (= "" (closing-tag nil)))))
+
 (deftest test-transform-lines-empty-input
     (testing "transform-lines"
         (are [x y] (= x y)
