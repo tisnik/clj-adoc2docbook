@@ -832,6 +832,19 @@
             [:screen-empty    nil]                                      " "
             [:screen-empty    nil]                                      "  ")))
 
+(deftest test-get-output-last-status-screen-empty
+    (testing "get-output"
+        (are [output line] (= output (get-output "BZ-link" line :screen-empty))
+            [:screen          (screen-empty "   code")]      "   code"
+            [:screen          (screen-empty "    code")]     "    code"
+            [:screen          (screen-empty "     code")]    "     code"
+            [:paragraph       (screen-end "" "para")]                   "para"
+            [:paragraph       (screen-end "" " para")]                  " para"
+            [:paragraph       (screen-end "" "  para")]                 "  para"
+            [:screen-empty    nil]                                      ""
+            [:screen-empty    nil]                                      " "
+            [:screen-empty    nil]                                      "  ")))
+
 (deftest test-transform-lines-empty-input
     (testing "transform-lines"
         (are [x y] (= x y)
