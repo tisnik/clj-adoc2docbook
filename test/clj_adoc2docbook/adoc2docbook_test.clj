@@ -819,6 +819,18 @@
             [:itemized-screen (screen-in-middle "    code")]     "    code"
             [:itemized-screen (screen-in-middle "     code")]    "     code")))
 
+(deftest test-get-output-last-status-screen
+    (testing "get-output"
+        (are [output line] (= output (get-output "BZ-link" line :screen))
+            [:screen          (screen-in-middle-notrim "   code")]      "   code"
+            [:screen          (screen-in-middle-notrim "    code")]     "    code"
+            [:screen          (screen-in-middle-notrim "     code")]    "     code"
+            [:paragraph       (screen-end "" "para")]                   "para"
+            [:paragraph       (screen-end "" " para")]                  " para"
+            [:paragraph       (screen-end "" "  para")]                 "  para"
+            [:screen-empty    nil]                                      ""
+            [:screen-empty    nil]                                      " "
+            [:screen-empty    nil]                                      "  ")))
 
 (deftest test-transform-lines-empty-input
     (testing "transform-lines"
