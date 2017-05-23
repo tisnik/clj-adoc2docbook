@@ -108,14 +108,14 @@
 (defn first-list-item
     [link-to-bugzilla line]
     ["<itemizedlist>\n"
-     (list-item (asciidoc-like-transformation link-to-bugzilla line))])
+     (list-item link-to-bugzilla line)])
 
 (defn end-para-first-list-item
     [link-to-bugzilla line]
     ["</para>\n"
      "\n"
      "<itemizedlist>\n"
-     (list-item (asciidoc-like-transformation link-to-bugzilla line))])
+     (list-item link-to-bugzilla line)])
 
 (defn last-list-item
     [link-to-bugzilla line]
@@ -179,17 +179,18 @@
         [:nothing         :normal]   [:paragraph       (start-para link-to-bugzilla line)]
         [:nothing         :item]     [:itemized-list   (first-list-item link-to-bugzilla line)]
         [:nothing         :screen]   [:screen          (screen-begin line)]
-        [:paragraph       :normal]   [:paragraph       (middle-in-para line)]
+        [:paragraph       :normal]   [:paragraph       (middle-in-para link-to-bugzilla line)]
         [:paragraph       :empty]    [:nothing         (end-para)]
         [:paragraph       :item]     [:itemized-list   (end-para-first-list-item link-to-bugzilla line)]
         [:paragraph       :screen]   [:screen          (end-para-screen-begin line)]
-        [:itemized-list   :item]     [:itemized-list   (list-item line)]
+        [:itemized-list   :item]     [:itemized-list   (list-item link-to-bugzilla line)]
         [:itemized-list   :empty]    [:itemized-list   nil] ;ignore
         [:itemized-list   :normal]   [:paragraph       (last-list-item link-to-bugzilla line)]
         [:itemized-list   :screen]   [:itemized-screen (screen-list-item-begin line)]
         [:itemized-screen :screen]   [:itemized-screen (screen-in-middle line)]
         [:itemized-screen :item]     [:itemized-list   (screen-list-item-end line)]
         [:itemized-screen :empty]    [:itemized-screen nil]
+        [:itemized-screen :normal]   [:paragraph       (screen-end line)]
         [:screen          :screen]   [:screen          (screen-in-middle-notrim line)]
         [:screen          :normal]   [:paragraph       (screen-end link-to-bugzilla line)]
         [:screen          :empty]    [:screen-empty    nil]
