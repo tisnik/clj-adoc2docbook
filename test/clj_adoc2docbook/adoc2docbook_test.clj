@@ -803,6 +803,23 @@
             [:itemized-screen  (screen-list-item-begin "    code")]  "    code"
             [:itemized-screen  (screen-list-item-begin "     code")] "     code")))
 
+(deftest test-get-output-last-status-itemized-screen
+    (testing "get-output"
+        (are [output line] (= output (get-output "BZ-link" line :itemized-screen))
+            [:itemized-list   (screen-list-item-end "* item")]   "* item"
+            [:itemized-list   (screen-list-item-end " * item")]  " * item"
+            [:itemized-list   (screen-list-item-end "  * item")] "  * item"
+            [:itemized-screen nil]                               ""
+            [:itemized-screen nil]                               " "
+            [:itemized-screen nil]                               "  "
+            [:paragraph       (screen-end "" "para")]            "para"
+            [:paragraph       (screen-end "" " para")]           " para"
+            [:paragraph       (screen-end "" "  para")]          "  para"
+            [:itemized-screen (screen-in-middle "   code")]      "   code"
+            [:itemized-screen (screen-in-middle "    code")]     "    code"
+            [:itemized-screen (screen-in-middle "     code")]    "     code")))
+
+
 (deftest test-transform-lines-empty-input
     (testing "transform-lines"
         (are [x y] (= x y)
