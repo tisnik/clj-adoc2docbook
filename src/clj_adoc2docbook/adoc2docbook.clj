@@ -197,7 +197,7 @@
         [:screen-empty    :screen]   [:screen          (screen-empty line)]
         [:screen-empty    :normal]   [:paragraph       (screen-end link-to-bugzilla line)]
         [:screen-empty    :empty]    [:screen-empty    nil]
-        [last-status line]))
+                                     [last-status line]))
 
 (defn closing-tag
     [status]

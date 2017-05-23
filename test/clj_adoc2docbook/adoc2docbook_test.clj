@@ -838,12 +838,16 @@
             [:screen          (screen-empty "   code")]      "   code"
             [:screen          (screen-empty "    code")]     "    code"
             [:screen          (screen-empty "     code")]    "     code"
-            [:paragraph       (screen-end "" "para")]                   "para"
-            [:paragraph       (screen-end "" " para")]                  " para"
-            [:paragraph       (screen-end "" "  para")]                 "  para"
-            [:screen-empty    nil]                                      ""
-            [:screen-empty    nil]                                      " "
-            [:screen-empty    nil]                                      "  ")))
+            [:paragraph       (screen-end "" "para")]        "para"
+            [:paragraph       (screen-end "" " para")]       " para"
+            [:paragraph       (screen-end "" "  para")]      "  para"
+            [:screen-empty    nil]                           ""
+            [:screen-empty    nil]                           " "
+            [:screen-empty    nil]                           "  ")))
+
+(deftest test-get-output-last-status-unknown
+    (testing "get-output"
+        (is (= [:unknown "line"] (get-output "BZ-link" "line" :unknown)))))
 
 (deftest test-transform-lines-empty-input
     (testing "transform-lines"
