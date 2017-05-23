@@ -771,6 +771,22 @@
             [:screen     ["<screen>\n" "code" "\n"]]                                              "    code"
             [:screen     ["<screen>\n" "code" "\n"]]                                              "     code")))
 
+(deftest test-get-output-last-status-paragraph
+    (testing "get-output"
+        (are [output line] (= output (get-output "BZ-link" line :paragraph))
+            [:paragraph     [" " "para"]]                                    "para"
+            [:paragraph     [" " " para"]]                                   " para"
+            [:paragraph     [" " "  para"]]                                  "  para"
+            [:nothing       ["</para>\n" "\n"]]                              ""
+            [:nothing       ["</para>\n" "\n"]]                              " "
+            [:nothing       ["</para>\n" "\n"]]                              "  "
+            [:itemized-list (end-para-first-list-item "BZ-link" "* ")]       "* "
+            [:itemized-list (end-para-first-list-item "BZ-link" "* item")]   "* item"
+            [:itemized-list (end-para-first-list-item "BZ-link" "*  item")]  "*  item"
+            [:screen        (end-para-screen-begin "   code")]               "   code"
+            [:screen        (end-para-screen-begin "    code")]              "    code"
+            [:screen        (end-para-screen-begin "     code")]             "     code")))
+
 (deftest test-transform-lines-empty-input
     (testing "transform-lines"
         (are [x y] (= x y)
