@@ -190,13 +190,13 @@
         [:itemized-screen :screen]   [:itemized-screen (screen-in-middle line)]
         [:itemized-screen :item]     [:itemized-list   (screen-list-item-end line)]
         [:itemized-screen :empty]    [:itemized-screen nil]
-        [:itemized-screen :normal]   [:paragraph       (screen-end line)]
+        [:itemized-screen :normal]   [:paragraph       (screen-end link-to-bugzilla line)]
         [:screen          :screen]   [:screen          (screen-in-middle-notrim line)]
         [:screen          :normal]   [:paragraph       (screen-end link-to-bugzilla line)]
         [:screen          :empty]    [:screen-empty    nil]
         [:screen-empty    :screen]   [:screen          (screen-empty line)]
         [:screen-empty    :normal]   [:paragraph       (screen-end link-to-bugzilla line)]
-        [:screen-empty    :empty]    [:screen-empty    ""]
+        [:screen-empty    :empty]    [:screen-empty    nil]
         [last-status line]))
 
 (defn closing-tag
@@ -208,6 +208,7 @@
         :itemized-list   "</itemizedlist>\n"
         :itemized-screen "</screen>\n"
                          "")) ; no match
+
 (def http-regexp
     ; scheme     host name                             domain       query+fragment               we don't want those chars at the end of URL
     #"(https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)[^?.,!) ])")
