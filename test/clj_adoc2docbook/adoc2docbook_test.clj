@@ -755,6 +755,22 @@
     (testing "closing-tag"
         (is (= "" (closing-tag nil)))))
 
+(deftest test-get-output-last-status-nothing
+    (testing "get-output"
+        (are [output line] (= output (get-output "BZ-link" line :nothing))
+            [:nothing       nil]                                                                  ""
+            [:nothing       nil]                                                                  " "
+            [:nothing       nil]                                                                  "  "
+            [:paragraph     ["<para>" "para"]]                                                    "para"
+            [:paragraph     ["<para>" " para"]]                                                   " para"
+            [:paragraph     ["<para>" "  para"]]                                                  "  para"
+            [:itemized-list ["<itemizedlist>\n" "    <listitem><para></para></listitem>\n"]]      "* "
+            [:itemized-list ["<itemizedlist>\n" "    <listitem><para>item</para></listitem>\n"]]  " * item"
+            [:itemized-list ["<itemizedlist>\n" "    <listitem><para>item</para></listitem>\n"]]  "  * item"
+            [:screen     ["<screen>\n" "code" "\n"]]                                              "   code"
+            [:screen     ["<screen>\n" "code" "\n"]]                                              "    code"
+            [:screen     ["<screen>\n" "code" "\n"]]                                              "     code")))
+
 (deftest test-transform-lines-empty-input
     (testing "transform-lines"
         (are [x y] (= x y)
