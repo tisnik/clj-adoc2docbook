@@ -81,6 +81,10 @@
           content    (str/trim (subs line star-index))]
         (str "    <listitem><para>" (asciidoc-like-transformation link-to-bugzilla content) "</para></listitem>\n")))
 
+(defn screen
+    [line]
+    (str/trim line))
+
 (defn screen-list-item-begin
     [line]
     (str "</itemizedlist>\n\n<screen>\n" line))
@@ -123,10 +127,6 @@
      "\n"
      "<para>"
      (asciidoc-like-transformation link-to-bugzilla line)])
-
-(defn screen
-    [line]
-    (str/trim line))
 
 (defn screen-notrim
     [line]
