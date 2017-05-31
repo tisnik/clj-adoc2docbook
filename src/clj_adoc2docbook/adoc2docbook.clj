@@ -93,7 +93,7 @@
     [line]
     (let [star-index (inc (.indexOf line "*"))
           content    (str/trim (subs line star-index))]
-        (str "\n</screen>\n\n<itemizedlist>\n    <listitem><para>" content "</para></listitem>\n")))
+        (str "\n</screen>\n\n<itemizedlist>\n    <listitem><para>" (asciidoc-like-transformation content) "</para></listitem>\n")))
 
 (defn start-para
     [link-to-bugzilla line]
