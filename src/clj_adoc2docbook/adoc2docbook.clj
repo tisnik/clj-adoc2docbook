@@ -90,10 +90,10 @@
     (str "</itemizedlist>\n\n<screen>\n" (screen line) "\n"))
 
 (defn screen-list-item-end
-    [line]
+    [link-to-bugzilla line]
     (let [star-index (inc (.indexOf line "*"))
           content    (str/trim (subs line star-index))]
-        (str "\n</screen>\n\n<itemizedlist>\n    <listitem><para>" (asciidoc-like-transformation content) "</para></listitem>\n")))
+        (str "\n</screen>\n\n<itemizedlist>\n    <listitem><para>" (asciidoc-like-transformation link-to-bugzilla content) "</para></listitem>\n")))
 
 (defn start-para
     [link-to-bugzilla line]
@@ -112,14 +112,14 @@
 (defn first-list-item
     [link-to-bugzilla line]
     ["<itemizedlist>\n"
-     (list-item (asciidoc-like-transformation link-to-bugzilla line))])
+     (list-item link-to-bugzilla (asciidoc-like-transformation link-to-bugzilla line))])
 
 (defn end-para-first-list-item
     [link-to-bugzilla line]
     ["</para>\n"
      "\n"
      "<itemizedlist>\n"
-     (list-item (asciidoc-like-transformation link-to-bugzilla line))])
+     (list-item link-to-bugzilla (asciidoc-like-transformation link-to-bugzilla line))])
 
 (defn last-list-item
     [link-to-bugzilla line]
@@ -188,7 +188,7 @@
         [:itemized-list   :normal]   [:paragraph       (last-list-item link-to-bugzilla line)]
         [:itemized-list   :screen]   [:itemized-screen (screen-list-item-begin line)]
         [:itemized-screen :screen]   [:itemized-screen (screen-in-middle line)]
-        [:itemized-screen :item]     [:itemized-list   (screen-list-item-end line)]
+        [:itemized-screen :item]     [:itemized-list   (screen-list-item-end link-to-bugzilla line)]
         [:itemized-screen :empty]    [:itemized-screen nil]
         [:itemized-screen :normal]   [:paragraph       (screen-end link-to-bugzilla line)]
         [:screen          :screen]   [:screen          (screen-in-middle-notrim line)]
