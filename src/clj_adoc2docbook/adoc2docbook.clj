@@ -112,14 +112,14 @@
 (defn first-list-item
     [link-to-bugzilla line]
     ["<itemizedlist>\n"
-     (list-item link-to-bugzilla line)])
+     (list-item (asciidoc-like-transformation link-to-bugzilla line))])
 
 (defn end-para-first-list-item
     [link-to-bugzilla line]
     ["</para>\n"
      "\n"
      "<itemizedlist>\n"
-     (list-item link-to-bugzilla line)])
+     (list-item (asciidoc-like-transformation link-to-bugzilla line))])
 
 (defn last-list-item
     [link-to-bugzilla line]
