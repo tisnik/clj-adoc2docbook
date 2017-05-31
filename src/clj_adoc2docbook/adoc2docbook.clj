@@ -87,7 +87,7 @@
 
 (defn screen-list-item-begin
     [line]
-    (str "</itemizedlist>\n\n<screen>\n" line))
+    (str "</itemizedlist>\n\n<screen>\n" (screen line) "\n"))
 
 (defn screen-list-item-end
     [line]
