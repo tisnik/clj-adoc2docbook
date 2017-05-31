@@ -597,16 +597,16 @@
 (deftest test-screen-list-item-begin
     (testing "screen-list-item-begin"
         (are [x y] (= x y)
-            "</itemizedlist>\n\n<screen>\ntest" (screen-list-item-begin "test")
-            "</itemizedlist>\n\n<screen>\nt" (screen-list-item-begin "t")
-            "</itemizedlist>\n\n<screen>\n " (screen-list-item-begin " "))))
+            "</itemizedlist>\n\n<screen>\ntest\n" (screen-list-item-begin "test")
+            "</itemizedlist>\n\n<screen>\nt\n" (screen-list-item-begin "t")
+            "</itemizedlist>\n\n<screen>\n\n" (screen-list-item-begin " "))))
 
 (deftest test-screen-list-item-end
     (testing "screen-list-item-end"
         (are [x y] (= x y)
-            "\n</screen>\n\n<itemizedlist>\n    <listitem><para>test</para></listitem>\n" (screen-list-item-end "* test")
-            "\n</screen>\n\n<itemizedlist>\n    <listitem><para>t</para></listitem>\n" (screen-list-item-end "* t")
-            "\n</screen>\n\n<itemizedlist>\n    <listitem><para></para></listitem>\n" (screen-list-item-end "* "))))
+            "\n</screen>\n\n<itemizedlist>\n    <listitem><para>test</para></listitem>\n" (screen-list-item-end "" "* test")
+            "\n</screen>\n\n<itemizedlist>\n    <listitem><para>t</para></listitem>\n" (screen-list-item-end "" "* t")
+            "\n</screen>\n\n<itemizedlist>\n    <listitem><para></para></listitem>\n" (screen-list-item-end "" "* "))))
 
 (deftest test-start-para
     (testing "start-para"
@@ -806,9 +806,9 @@
 (deftest test-get-output-last-status-itemized-screen
     (testing "get-output"
         (are [output line] (= output (get-output "BZ-link" line :itemized-screen))
-            [:itemized-list   (screen-list-item-end "* item")]   "* item"
-            [:itemized-list   (screen-list-item-end " * item")]  " * item"
-            [:itemized-list   (screen-list-item-end "  * item")] "  * item"
+            [:itemized-list   (screen-list-item-end "" "* item")]   "* item"
+            [:itemized-list   (screen-list-item-end "" " * item")]  " * item"
+            [:itemized-list   (screen-list-item-end "" "  * item")] "  * item"
             [:itemized-screen nil]                               ""
             [:itemized-screen nil]                               " "
             [:itemized-screen nil]                               "  "
