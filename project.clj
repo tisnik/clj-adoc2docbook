@@ -10,9 +10,9 @@
 ;      Pavel Tisnovsky
 ;
 
-(defproject org.clojars.tisnik/clj-adoc2docbook "0.3.0-SNAPSHOT"
+(defproject org.clojars.tisnik/clj-adoc2docbook "0.4.0-SNAPSHOT"
     :description "Library for asciidoc to docbook conversion"
-    :url "https://github.com/tisnik/clj-jenkins-api"
+    :url "https://github.com/tisnik/clj-adoc2docbook"
     :license {:name "Eclipse Public License"
               :url "http://www.eclipse.org/legal/epl-v10.html"}
     :dependencies [[org.clojure/clojure "1.7.0"]
