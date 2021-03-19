@@ -1,5 +1,5 @@
 ;
-;  (C) Copyright 2017, 2020  Pavel Tisnovsky
+;  (C) Copyright 2017, 2020, 2021  Pavel Tisnovsky
 ;
 ;  All rights reserved. This program and the accompanying materials
 ;  are made available under the terms of the Eclipse Public License v1.0
@@ -28,192 +28,192 @@
 ;
 
 (deftest test-escape-xml-chars-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/escape-xml-chars definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/escape-xml-chars function definition exists."
   (testing
-    "if the clj-adoc2docbook.adoc2docbook/escape-xml-chars definition exists."
+    "if the clj-adoc2docbook.adoc2docbook/escape-xml-chars function definition exists."
     (is (callable? 'clj-adoc2docbook.adoc2docbook/escape-xml-chars))))
 
 
 (deftest test-asciidoc-like-transformation-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/asciidoc-like-transformation definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/asciidoc-like-transformation function definition exists."
   (testing
-    "if the clj-adoc2docbook.adoc2docbook/asciidoc-like-transformation definition exists."
+    "if the clj-adoc2docbook.adoc2docbook/asciidoc-like-transformation function definition exists."
     (is (callable?
           'clj-adoc2docbook.adoc2docbook/asciidoc-like-transformation))))
 
 
 (deftest test-get-line-type-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/get-line-type definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/get-line-type function definition exists."
   (testing
-    "if the clj-adoc2docbook.adoc2docbook/get-line-type definition exists."
+    "if the clj-adoc2docbook.adoc2docbook/get-line-type function definition exists."
     (is (callable? 'clj-adoc2docbook.adoc2docbook/get-line-type))))
 
 
 (deftest test-list-item-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/list-item definition exists."
-  (testing "if the clj-adoc2docbook.adoc2docbook/list-item definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/list-item function definition exists."
+  (testing "if the clj-adoc2docbook.adoc2docbook/list-item function definition exists."
            (is (callable? 'clj-adoc2docbook.adoc2docbook/list-item))))
 
 
 (deftest test-screen-list-item-begin-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/screen-list-item-begin definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/screen-list-item-begin function definition exists."
   (testing
-    "if the clj-adoc2docbook.adoc2docbook/screen-list-item-begin definition exists."
+    "if the clj-adoc2docbook.adoc2docbook/screen-list-item-begin function definition exists."
     (is (callable? 'clj-adoc2docbook.adoc2docbook/screen-list-item-begin))))
 
 
 (deftest test-screen-list-item-end-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/screen-list-item-end definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/screen-list-item-end function definition exists."
   (testing
-    "if the clj-adoc2docbook.adoc2docbook/screen-list-item-end definition exists."
+    "if the clj-adoc2docbook.adoc2docbook/screen-list-item-end function definition exists."
     (is (callable? 'clj-adoc2docbook.adoc2docbook/screen-list-item-end))))
 
 
 (deftest test-start-para-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/start-para definition exists."
-  (testing "if the clj-adoc2docbook.adoc2docbook/start-para definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/start-para function definition exists."
+  (testing "if the clj-adoc2docbook.adoc2docbook/start-para function definition exists."
            (is (callable? 'clj-adoc2docbook.adoc2docbook/start-para))))
 
 
 (deftest test-middle-in-para-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/middle-in-para definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/middle-in-para function definition exists."
   (testing
-    "if the clj-adoc2docbook.adoc2docbook/middle-in-para definition exists."
+    "if the clj-adoc2docbook.adoc2docbook/middle-in-para function definition exists."
     (is (callable? 'clj-adoc2docbook.adoc2docbook/middle-in-para))))
 
 
 (deftest test-end-para-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/end-para definition exists."
-  (testing "if the clj-adoc2docbook.adoc2docbook/end-para definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/end-para function definition exists."
+  (testing "if the clj-adoc2docbook.adoc2docbook/end-para function definition exists."
            (is (callable? 'clj-adoc2docbook.adoc2docbook/end-para))))
 
 
 (deftest test-first-list-item-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/first-list-item definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/first-list-item function definition exists."
   (testing
-    "if the clj-adoc2docbook.adoc2docbook/first-list-item definition exists."
+    "if the clj-adoc2docbook.adoc2docbook/first-list-item function definition exists."
     (is (callable? 'clj-adoc2docbook.adoc2docbook/first-list-item))))
 
 
 (deftest test-end-para-first-list-item-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/end-para-first-list-item definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/end-para-first-list-item function definition exists."
   (testing
-    "if the clj-adoc2docbook.adoc2docbook/end-para-first-list-item definition exists."
+    "if the clj-adoc2docbook.adoc2docbook/end-para-first-list-item function definition exists."
     (is (callable? 'clj-adoc2docbook.adoc2docbook/end-para-first-list-item))))
 
 
 (deftest test-last-list-item-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/last-list-item definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/last-list-item function definition exists."
   (testing
-    "if the clj-adoc2docbook.adoc2docbook/last-list-item definition exists."
+    "if the clj-adoc2docbook.adoc2docbook/last-list-item function definition exists."
     (is (callable? 'clj-adoc2docbook.adoc2docbook/last-list-item))))
 
 
 (deftest test-screen-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/screen definition exists."
-  (testing "if the clj-adoc2docbook.adoc2docbook/screen definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/screen function definition exists."
+  (testing "if the clj-adoc2docbook.adoc2docbook/screen function definition exists."
            (is (callable? 'clj-adoc2docbook.adoc2docbook/screen))))
 
 
 (deftest test-screen-notrim-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/screen-notrim definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/screen-notrim function definition exists."
   (testing
-    "if the clj-adoc2docbook.adoc2docbook/screen-notrim definition exists."
+    "if the clj-adoc2docbook.adoc2docbook/screen-notrim function definition exists."
     (is (callable? 'clj-adoc2docbook.adoc2docbook/screen-notrim))))
 
 
 (deftest test-screen-empty-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/screen-empty definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/screen-empty function definition exists."
   (testing
-    "if the clj-adoc2docbook.adoc2docbook/screen-empty definition exists."
+    "if the clj-adoc2docbook.adoc2docbook/screen-empty function definition exists."
     (is (callable? 'clj-adoc2docbook.adoc2docbook/screen-empty))))
 
 
 (deftest test-screen-begin-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/screen-begin definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/screen-begin function definition exists."
   (testing
-    "if the clj-adoc2docbook.adoc2docbook/screen-begin definition exists."
+    "if the clj-adoc2docbook.adoc2docbook/screen-begin function definition exists."
     (is (callable? 'clj-adoc2docbook.adoc2docbook/screen-begin))))
 
 
 (deftest test-end-para-screen-begin-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/end-para-screen-begin definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/end-para-screen-begin function definition exists."
   (testing
-    "if the clj-adoc2docbook.adoc2docbook/end-para-screen-begin definition exists."
+    "if the clj-adoc2docbook.adoc2docbook/end-para-screen-begin function definition exists."
     (is (callable? 'clj-adoc2docbook.adoc2docbook/end-para-screen-begin))))
 
 
 (deftest test-screen-in-middle-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/screen-in-middle definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/screen-in-middle function definition exists."
   (testing
-    "if the clj-adoc2docbook.adoc2docbook/screen-in-middle definition exists."
+    "if the clj-adoc2docbook.adoc2docbook/screen-in-middle function definition exists."
     (is (callable? 'clj-adoc2docbook.adoc2docbook/screen-in-middle))))
 
 
 (deftest test-screen-in-middle-notrim-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/screen-in-middle-notrim definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/screen-in-middle-notrim function definition exists."
   (testing
-    "if the clj-adoc2docbook.adoc2docbook/screen-in-middle-notrim definition exists."
+    "if the clj-adoc2docbook.adoc2docbook/screen-in-middle-notrim function definition exists."
     (is (callable? 'clj-adoc2docbook.adoc2docbook/screen-in-middle-notrim))))
 
 
 (deftest test-screen-end-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/screen-end definition exists."
-  (testing "if the clj-adoc2docbook.adoc2docbook/screen-end definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/screen-end function definition exists."
+  (testing "if the clj-adoc2docbook.adoc2docbook/screen-end function definition exists."
            (is (callable? 'clj-adoc2docbook.adoc2docbook/screen-end))))
 
 
 (deftest test-get-output-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/get-output definition exists."
-  (testing "if the clj-adoc2docbook.adoc2docbook/get-output definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/get-output function definition exists."
+  (testing "if the clj-adoc2docbook.adoc2docbook/get-output function definition exists."
            (is (callable? 'clj-adoc2docbook.adoc2docbook/get-output))))
 
 
 (deftest test-closing-tag-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/closing-tag definition exists."
-  (testing "if the clj-adoc2docbook.adoc2docbook/closing-tag definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/closing-tag function definition exists."
+  (testing "if the clj-adoc2docbook.adoc2docbook/closing-tag function definition exists."
            (is (callable? 'clj-adoc2docbook.adoc2docbook/closing-tag))))
 
 
 (deftest test-create-normal-links-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/create-normal-links definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/create-normal-links function definition exists."
   (testing
-    "if the clj-adoc2docbook.adoc2docbook/create-normal-links definition exists."
+    "if the clj-adoc2docbook.adoc2docbook/create-normal-links function definition exists."
     (is (callable? 'clj-adoc2docbook.adoc2docbook/create-normal-links))))
 
 
 (deftest test-create-bugzilla-links-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/create-bugzilla-links definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/create-bugzilla-links function definition exists."
   (testing
-    "if the clj-adoc2docbook.adoc2docbook/create-bugzilla-links definition exists."
+    "if the clj-adoc2docbook.adoc2docbook/create-bugzilla-links function definition exists."
     (is (callable? 'clj-adoc2docbook.adoc2docbook/create-bugzilla-links))))
 
 
 (deftest test-create-links-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/create-links definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/create-links function definition exists."
   (testing
-    "if the clj-adoc2docbook.adoc2docbook/create-links definition exists."
+    "if the clj-adoc2docbook.adoc2docbook/create-links function definition exists."
     (is (callable? 'clj-adoc2docbook.adoc2docbook/create-links))))
 
 
 (deftest test-format-one-line-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/format-one-line definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/format-one-line function definition exists."
   (testing
-    "if the clj-adoc2docbook.adoc2docbook/format-one-line definition exists."
+    "if the clj-adoc2docbook.adoc2docbook/format-one-line function definition exists."
     (is (callable? 'clj-adoc2docbook.adoc2docbook/format-one-line))))
 
 
 (deftest test-format-all-lines-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/format-all-lines definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/format-all-lines function definition exists."
   (testing
-    "if the clj-adoc2docbook.adoc2docbook/format-all-lines definition exists."
+    "if the clj-adoc2docbook.adoc2docbook/format-all-lines function definition exists."
     (is (callable? 'clj-adoc2docbook.adoc2docbook/format-all-lines))))
 
 
 (deftest test-transform-lines-existence
-  "Check that the clj-adoc2docbook.adoc2docbook/transform-lines definition exists."
+  "Check that the clj-adoc2docbook.adoc2docbook/transform-lines function definition exists."
   (testing
-    "if the clj-adoc2docbook.adoc2docbook/transform-lines definition exists."
+    "if the clj-adoc2docbook.adoc2docbook/transform-lines function definition exists."
     (is (callable? 'clj-adoc2docbook.adoc2docbook/transform-lines))))
 
 ;
