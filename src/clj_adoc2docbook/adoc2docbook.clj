@@ -1,5 +1,5 @@
 ;
-;  (C) Copyright 2017, 2020  Pavel Tisnovsky
+;  (C) Copyright 2017, 2020, 2021  Pavel Tisnovsky
 ;
 ;  All rights reserved. This program and the accompanying materials
 ;  are made available under the terms of the Eclipse Public License v1.0
@@ -18,6 +18,7 @@
 (require '[cogset-common.utils :refer :all])
 
 (defn escape-xml-chars
+  "Escape characters with special meaning in XML."
   [string]
   (str/escape string
     {\< "&lt;", \> "&gt;", \& "&amp;"}))
