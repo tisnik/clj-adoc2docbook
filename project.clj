@@ -19,6 +19,6 @@
                  [org.clojars.tisnik/cogset-common "0.6.0-SNAPSHOT"]]
   :plugins [[lein-codox "0.10.7"]
             [test2junit "1.1.0"]
-            [lein-cloverage "1.0.6"]]
+            [lein-cloverage "1.0.7-SNAPSHOT"]]
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})
